@@ -1,0 +1,70 @@
+.border{
+    border-radius: 7px;
+}
+.flex{
+    display: flex;
+    flex-direction: row;
+}
+.justify{
+    justify-content: center;
+}
+.align{
+    align-items: center;
+}
+.bg-grey{
+    background-color: #121212;
+}
+.width{
+    width: 32px;
+    
+}
+.height{
+    height: 32px;
+}
+.space{
+    justify-content: space-between;
+
+}
+.z{
+    z-index: 1;
+}
+.absolute{
+    position: absolute;
+    width: 22vw;
+    background-color: #121212;
+    border-radius: 10px;
+    /* top: 0; */
+    /* left: 0; */
+    z-index: 1000;
+}
+.mpg{
+    margin:10px;
+    padding: 4px;
+    gap: 14px;
+    font-size: 20px;
+
+}
+/* SCROLL BAR CSS */
+/* For WebKit based browsers like Chrome and Safari */
+/* You may need vendor prefixes for other browsers */
+
+/* Track */
+::-webkit-scrollbar {
+    width: 12px; /* Set width of the scrollbar */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #5a5a5a; /* Set color of the scrollbar handle */
+}
+
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #121212; /* Set color of the scrollbar track */
+}
+
+/* Corner */
+::-webkit-scrollbar-corner {
+    background: transparent; /* Set color of the scrollbar corner */
+}
