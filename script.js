@@ -92,7 +92,7 @@ const playMusic = (track, pause=false)=>{
 async function main() {
     
     // Getting the list of all the songs
-    await getSongs("songs/happy/");
+    await getSongs("songs/happy");
     console.log(songs);
     playMusic(songs[0],true)
    
