@@ -83,52 +83,49 @@ const playMusic = (track, pause = false) => {
 
 }
 
-async function displayAlbums(){
-    // let a = await fetch(`https://github.com/its-AnanyaSharma/Music-Monkey/tree/main/songs`)
-    let a = await fetch("/songs")
-    let response = await a.text();
-    let div = document.createElement("div")
-    div.innerHTML = response;
-    let anchor = div.getElementsByTagName("a")
-    let allcards = document.querySelector(".allcards")
-    let array = Array.from(anchor)
-    for (let index = 0; index < array.length; index++){
-        const e = array[index];
-
-
-    
-    if (e.href.includes("/songs") && !e.href.includes(".htaccess")) {
-            let folder = e.href.split("/").slice(-2)[0]
-            //Get metadata of the folder
-            let a = await fetch(`songs/${folder}/info.json`)
-            let response = await a.json();
-           
-            allcards.innerHTML = allcards.innerHTML + `<div data-folder="${folder}" class="card border">
-            <img src="songs/${folder}/cover.jpg">
-            <div class="play-button">
-                <img src="songs/${folder}/play-green.svg" alt="Play Icon">
-            </div>
-            <h3>${response.title}</h3>
-            <p>${response.description}</p>
-           
-        </div>`
-        }
-    }
-    
-     // Load the playlist whenever card is clicked
-     Array.from(document.getElementsByClassName("card")).forEach(e => { 
-        e.addEventListener("click", async item => {
-            if(document.querySelector(".left").style.left= "-100%"){
-                document.querySelector(".left").style.left= "0"
+async function displayAlbums() {
+    try {
+        let response = await fetch('https://raw.githubusercontent.com/its-AnanyaSharma/huraaayy/main/songs');
+        let text = await response.text();
+        let div = document.createElement("div");
+        div.innerHTML = text;
+        let anchor = div.getElementsByTagName("a");
+        let allcards = document.querySelector(".allcards");
+        let array = Array.from(anchor);
+        
+        for (let index = 0; index < array.length; index++) {
+            const e = array[index];
+            if (e.href.includes("/songs") && !e.href.includes(".htaccess")) {
+                let folder = e.href.split("/").slice(-2)[0];
+                let infoResponse = await fetch(`https://raw.githubusercontent.com/its-AnanyaSharma/huraaayy/main/songs/${folder}/info.json`);
+                let json = await infoResponse.json();
+                allcards.innerHTML += `<div data-folder="${folder}" class="card border">
+                    <img src="https://raw.githubusercontent.com/its-AnanyaSharma/huraaayy/main/songs/${folder}/cover.jpg">
+                    <div class="play-button">
+                        <img src="https://raw.githubusercontent.com/its-AnanyaSharma/huraaayy/main/songs/${folder}/play-green.svg" alt="Play Icon">
+                    </div>
+                    <h3>${json.title}</h3>
+                    <p>${json.description}</p>
+                </div>`;
             }
-            console.log("Fetching Songs")
-            songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`)  
-            playMusic(songs[0])
+        }
 
-        })
-    })
-   
+        // Load the playlist whenever a card is clicked
+        Array.from(document.getElementsByClassName("card")).forEach(e => { 
+            e.addEventListener("click", async item => {
+                if (document.querySelector(".left").style.left === "-100%") {
+                    document.querySelector(".left").style.left = "0";
+                }
+                console.log("Fetching Songs");
+                songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`);
+                playMusic(songs[0]);
+            });
+        });
+    } catch (error) {
+        console.error('Error fetching albums:', error);
+    }
 }
+
 
 
 async function main() {
