@@ -33,12 +33,6 @@ async function getSongs(folder) {
             songs.push(element.href.split(`/${folder}/`)[1]);
         }
     }
-    // Continue with your existing code...
-}
-
- 
-
-
     // Show all the songs in the playlist
     let songUL = document.querySelector(".songList ul")
     songUL.innerHTML = ""
@@ -68,7 +62,7 @@ async function getSongs(folder) {
         })
     })
 
-    return songs
+    return songs;
 }
 
 const playMusic = (track, pause = false) => {
