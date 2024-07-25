@@ -21,7 +21,7 @@ function formatTime(seconds) {
 
 async function getSongs(folder) {
     currFolder = folder;
-    let a = await fetch(`https://raw.githubusercontent.com/its-AnanyaSharma/huraaayy/main/songs/${folder}/info.json`)
+    let a = await fetch(`https://raw.githubusercontent.com/its-AnanyaSharma/Music-Monkey/main/songs/${folder}/`)
 
     // let a = await fetch(`/${folder}/`)
     let response = await a.text();
