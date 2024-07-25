@@ -21,20 +21,21 @@ function formatTime(seconds) {
 
 async function getSongs(folder) {
     currFolder = folder;
-    // let a = await fetch(`https://raw.githubusercontent.com/its-AnanyaSharma/Music-Monkey/main/songs/${folder}/`)
-
-    let a = await fetch(`/${folder}/`)
-    let response = await a.text();
-    let div = document.createElement("div")
-    div.innerHTML = response;
-    let as = div.getElementsByTagName("a")
-    songs = []
+    let response = await fetch(`https://its-ananyasharma.github.io/songs/${folder}/`);
+    let text = await response.text();
+    let div = document.createElement("div");
+    div.innerHTML = text;
+    let as = div.getElementsByTagName("a");
+    songs = [];
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
         if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split(`/${folder}/`)[1])
+            songs.push(element.href.split(`/${folder}/`)[1]);
         }
     }
+    // Continue with your existing code...
+}
+
  
 
 
